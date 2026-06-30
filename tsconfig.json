@@ -1,13 +1,14 @@
 {
-    CompilerOptions: {
+    "compilerOptions": {
         "module": "nodenext",
         "moduleResolution": "nodenext",
         "target": "esnext",
         "strict": true,
-        "noemit": true,
+        "noEmit": true,
         "erasableSyntaxOnly": true,
         "verbatimModuleSyntax": true,
         "allowImportingTsExtensions": true,
         "skipLibCheck": true,
+        "types": ["node"]
     }
 }

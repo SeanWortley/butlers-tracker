@@ -4,12 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    "start": "node src/index.ts",
-    "check": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file=.env src/index.ts",
+    "check": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "grammy": "^1.44.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "typescript": "^6.0.3"
+  }
 }
