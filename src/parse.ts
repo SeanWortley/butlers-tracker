@@ -19,9 +19,9 @@ export function parseOrder(text: string): Order | undefined {
         const matchReceived = text.match(/amount of R(\d+\.\d{2})/);
         const matchTip = text.match(/tip of R(\d+\.\d{2})/);
 
-        if (matchReceived && matchTip) {
+        if (matchReceived) {
             const received = Number(matchReceived[1]);
-            const tip = Number(matchTip[1]);
+            const tip = matchTip ? Number(matchTip[1]) : 0;
             const order: Order = { type: "snapscan", received: received, tip: tip };
             return order;
         }

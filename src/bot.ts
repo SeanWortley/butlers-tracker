@@ -1,17 +1,20 @@
 import { Bot } from "grammy";
 import { recordText } from "./app.ts";
-import { Shift } from "./shift.ts";
+import { shiftFor } from "./store.ts";
 
 export function initializeBot() {
     const bot = new Bot(process.env.BOT_TOKEN!);
     bot.start();
 
-    let shift = new Shift();
-
     bot.on(["message:text", "message:caption"], (ctx) => {
+        const userID = ctx.from?.id;
+        if (!userID) return;
+
         const text = ctx.message.text ?? ctx.message.caption;
+        const shift = shiftFor(userID);
 
         console.log(text);
-        recordText(shift, text);
+        const reply = recordText(shift, text);
+        if (reply) ctx.reply(reply);
     })
 }
