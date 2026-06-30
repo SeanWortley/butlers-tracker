@@ -1,4 +1,5 @@
 import { Bot } from "grammy";
+import { recordText } from "./app.ts";
 
 export function initializeBot() {
     const bot = new Bot(process.env.BOT_TOKEN!);
@@ -8,5 +9,6 @@ export function initializeBot() {
         const text = ctx.message.text ?? ctx.message.caption;
 
         console.log(text);
+        recordText(text);
     })
 }
