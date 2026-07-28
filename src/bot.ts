@@ -1,7 +1,7 @@
 import { Bot, InlineKeyboard, Context } from "grammy";
 import { conversations, createConversation } from "@grammyjs/conversations";
 import type { Conversation, ConversationFlavor } from "@grammyjs/conversations";
-import { recordText } from "./app.ts";
+import { recordText, newShift } from "./app.ts";
 import { shiftFor } from "./store.ts";
 import { type Order, earnings } from "./order.ts";
 
@@ -20,8 +20,20 @@ export function initializeBot() {
         const shift = shiftFor(userID);
 
         console.log(text);
-        const reply = recordText(shift, text);
+
+        let reply;
+
+        if (text == "/start") {
+
+            reply = newShift(shift);
+
+        }
+        else {
+            reply = recordText(shift, text);
+        }
         if (reply) sendTotal(ctx, reply);
+
+
     })
 
     bot.callbackQuery("enter_cash", async (ctx) => {
@@ -36,12 +48,12 @@ async function cashOrder(conversation: Conversation, ctx: Context) {
     const userID = ctx.from?.id;
     if (!userID) return;
 
-    await ctx.reply("Cash received?");
+    await ctx.reply("Cash received? (enter the number only)");
     const received = await conversation.form.number(async (ctx) => {
         await ctx.reply("Cash order cancelled.")
     });
 
-    await ctx.reply("Order total?");
+    await ctx.reply("Order total? (enter the number only)");
     const total = await conversation.form.number(async (ctx) => {
         await ctx.reply("Cash order cancelled.")
     });

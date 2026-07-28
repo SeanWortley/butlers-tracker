@@ -14,4 +14,8 @@ export class Shift {
         }
         return total;
     }
+
+    wipeShift() {
+        this.orders = [];
+    }
 };
