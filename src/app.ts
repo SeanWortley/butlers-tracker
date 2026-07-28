@@ -7,12 +7,12 @@ export function recordText(shift: Shift, text: string): string | undefined {
     if (!order) return undefined;
     shift.addOrder(order);
 
-    return `You made R${earnings(order).toFixed(2)}. Shift total: R${shift.getTotal().toFixed(2)}`;
+    return `You made R${earnings(order).toFixed(2)}. Shift total: R${shift.getTotal().toFixed(2)}\n\n Type /start to end this shift and begin a new one.`;
 }
 
 export function newShift(shift: Shift): string {
 
     shift.wipeShift();
-    return "Welcome to your new shift :)\nTo log uber orders, send the first message that comes through associated with that order.\nTo log snapscan or credit card orders, send the successful payment link photo.\nTo log cash orders, click the \"enter cash\" button."
+    return "Welcome to your new shift :)\n\nTo log uber orders, send the first message that comes through associated with that order.\nTo log snapscan or credit card orders, send the successful payment link photo.\nTo log cash orders, click the \"enter cash\" button.\n\nType /start to end this shift and begin a new one.";
 
 }
